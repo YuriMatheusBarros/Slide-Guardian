@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Resgate da Terra: Guardião</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Paleta de Cores e Fontes Adaptada */
+        :root {
+            --bg-dark-1: #0B1018;
+            --bg-dark-2: #192532;
+            --accent-orange-1: #F2A900;
+            --accent-orange-2: #D4880C;
+            --accent-green-1: #6EBF8B;
+            --text-light: #E0E0E0;
+            --text-medium: #A0A0A0;
+            --font-title: 'Orbitron', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Corpo */
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--bg-dark-1), var(--bg-dark-2));
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efeito de Neblina Animada */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+            animation: fog-animation 40s linear infinite;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes fog-animation {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5%, 5%); }
+            50% { transform: translate(0, -5%); }
+            75% { transform: translate(5%, 0); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Container Principal da Apresentação */
+        #presentation-container {
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 700px;
+            background-color: rgba(25, 37, 50, 0.7);
+            border: 1px solid rgba(242, 169, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(242, 169, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Slide Teaser Fullscreen */
+        #teaser-slide {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            transition: opacity 0.5s ease-out;
+        }
+        #teaser-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+        }
+        #teaser-overlay {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            
+        }
+        #video-controls {
+            position: absolute;
+            bottom: 120px;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .control-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .control-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        #start-btn {
+            position: absolute;
+            bottom: 40px;
+        }
+
+        /* Slides Normais */
+        .slide {
+            flex-grow: 1;
+            padding: 3rem 4rem;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilos de Tipografia */
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            color: var(--text-light);
+            text-shadow: 0 0 10px var(--accent-orange-2), 0 0 5px var(--accent-orange-1);
+        }
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.2rem; margin-bottom: 2rem; }
+        h3 { font-size: 1.5rem; color: var(--accent-orange-1); }
+        p { color: var(--text-medium); line-height: 1.6; max-width: 70ch; }
+        b, strong { color: var(--accent-orange-1); }
+
+        /* ... (restante do CSS permanece o mesmo) ... */
+        .styled-list li { background-color: rgba(11, 16, 24, 0.4); padding: 0.75rem 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent-orange-2); text-align: left; transition: all 0.2s ease-in-out; }
+        .styled-list li:hover { transform: translateX(10px); border-left-color: var(--accent-orange-1); }
+        .logo-image { width: 50%; height: 85%; margin-bottom: 1.5rem; }
+        @keyframes pulse-glow { 0%, 100% { filter: drop-shadow(0 0 10px var(--accent-orange-2)); transform: scale(1); } 50% { filter: drop-shadow(0 0 20px var(--accent-orange-1)); transform: scale(1.05); } }
+        .quote-block { background: rgba(11, 16, 24, 0.6); padding: 2rem; border-radius: 15px; border-left: 3px solid var(--accent-orange-1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .chart-container { display: flex; gap: 2rem; align-items: center; }
+        .chart-circle { position: relative; width: 150px; height: 150px; }
+        .chart-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .chart-circle-bg { fill: none; stroke: rgba(242, 169, 0, 0.1); stroke-width: 12; }
+        .chart-circle-fg { fill: none; stroke: var(--accent-orange-1); stroke-width: 12; stroke-linecap: round; animation: fill-circle 2s ease-out; }
+        .chart-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; font-family: var(--font-title); color: var(--accent-orange-1); }
+        @keyframes fill-circle { from { stroke-dasharray: 0, 1000; } }
+        .image-placeholder { background-color: #0A120A; border: 2px dashed var(--accent-orange-2); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: var(--text-medium); font-family: var(--font-title); transition: all 0.3s ease; box-shadow: inset 0 0 15px rgba(0,0,0,0.5); width: 100%; height: 100%; }
+        .image-placeholder:hover { border-color: var(--accent-orange-1); }
+        .degraded-forest-bg { background-image: linear-gradient(rgba(11, 16, 24, 0.9), rgba(25, 37, 50, 1)), url(https://placehold.co/1200x700/3a2d1e/101d11?text=Mundo+Destruído); background-size: cover; background-position: center; }
+        .target-card { background-color: rgba(11, 16, 24, 0.4); padding: 2rem 1.5rem; border-radius: 15px; border: 1px solid rgba(110, 191, 139, 0.2); transition: all 0.3s ease-in-out; display: flex; flex-direction: column; align-items: center; height: 100%; }
+        .target-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: var(--accent-green-1); }
+        .target-card h3 { color: var(--text-light); text-shadow: none; margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1.25rem; }
+        .target-card .icon { width: 60px; height: 60px; stroke: var(--accent-green-1); filter: drop-shadow(0 0 8px var(--accent-green-1)); }
+        .target-card p { font-size: 0.9rem; color: var(--text-medium); flex-grow: 1; }
+        #navigation { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 20px; z-index: 100; }
+        .nav-btn { background-color: rgba(242, 169, 0, 0.2); border: 1px solid var(--accent-orange-2); color: var(--text-light); padding: 10px 20px; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-body); }
+        .nav-btn:hover { background-color: var(--accent-orange-1); box-shadow: 0 0 15px var(--accent-orange-2); color: #000; }
+        #slide-counter { color: var(--text-medium); font-size: 0.9rem; min-width: 50px; text-align: center; }
+
+        @media (max-width: 768px) {
+            .slide { padding: 2rem; } h1 { font-size: 2.2rem; } h2 { font-size: 1.8rem; }
+            .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .grid-cols-3 { grid-template-columns: 1fr; }
+            .chart-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Slide Teaser (Fullscreen) -->
+    <div id="teaser-slide">
+        <video id="teaser-video" autoplay loop>
+            <source src="TEASER GUARDIAN ‐ Feito com o Clipchamp (3) (1).mp4" type="video/mp4">
+            O seu navegador não suporta a tag de vídeo.
+        </video>
+        <div id="teaser-overlay">
+            <div id="video-controls">
+                <button id="play-pause-btn" class="control-btn" aria-label="Pausar vídeo">
+                    <svg id="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+                    <svg id="play-icon" viewBox="0 0 24 24" style="display: none;"><path d="M8 5v14l11-7z"></path></svg>
+                </button>
+            </div>
+            <button id="start-btn" class="nav-btn mt-8 text-lg px-8 py-3">Iniciar Apresentação</button>
+        </div>
+    </div>
+
+    <!-- Container Principal (Inicialmente oculto) -->
+    <div id="presentation-container" style="display: none;">
+        <!-- Slide 1: Abertura -->
+        <div class="slide" id="slide-1">
+            <img src="Logo.png" alt="Logo do Jogo Guardian: Earth Rescue" class="logo-image">
+            <h1 class="font-black tracking-widest uppercase">Guardião:</h1>
+            <h3 class="font-normal tracking-[0.5em]">Resgate do planeta Terra</h3>
+        </div>
+
+        <!-- ... (Todos os outros slides de 2 a 11 permanecem aqui, inalterados) ... -->
+
+        <!-- Slide 2: Citação -->
+        <div class="slide" id="slide-2">
+            <h2>O Conceito de Ativismo Ambiental</h2>
+            <br>
+            <div class="quote-block">
+                <p class="text-xl italic text-gray-300">“...uma mobilização que engloba comportamentos relacionados a uma atitude proativa das pessoas com objetivo de sensibilizar outros indivíduos em relação às questões do meio ambiente.”</p>
+                <p class="text-right mt-4 text-gray-400">- Gonçalvez-Dias et al. (2009)</p>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Estatísticas -->
+        <div class="slide" id="slide-3">
+             <h2>Engajamento Ambiental em Números</h2>
+             <div class="chart-container w-full max-w-4xl">
+                 <div class="flex-1 text-left">
+                     <p class="text-lg">Um estudo sobre o comportamento ambiental de 156 indivíduos identificou que o <strong>engajamento prático é mínimo</strong>, já que mais de 83% não possuem participação ativa em causas ecológicas.</p>
+                     <p class="text-lg mt-4">Essa falta de engajamento é acompanhada por uma <strong>deficiência no conhecimento formal</strong>, pois mais de 50% dos entrevistados admitiram nunca ter recebido formação específica sobre o meio ambiente.</p>
+                     <p class="mt-8 text-sm text-gray-500">Fonte: PIVA; LUIZ, 2023.</p>
+                 </div>
+                 <div class="flex flex-col gap-8">
+                     <div class="text-center">
+                         <div class="chart-circle">
+                             <svg><circle class="chart-circle-bg" cx="75" cy="75" r="69"></circle><circle class="chart-circle-fg" cx="75" cy="75" r="69" stroke-dasharray="358, 434"></circle></svg>
+                             <div class="chart-text">>83%</div>
+                         </div>
+                         <p class="mt-2 text-sm">Sem participação ativa</p>
+                     </div>
+                     <div class="text-center">
+                         <div class="chart-circle">
+                            <svg><circle class="chart-circle-bg" cx="75" cy="75" r="69"></circle><circle class="chart-circle-fg" cx="75" cy="75" r="69" stroke-dasharray="217, 434"></circle></svg>
+                             <div class="chart-text">>50%</div>
+                         </div>
+                         <p class="mt-2 text-sm">Sem formação específica</p>
+                     </div>
+                 </div>
+             </div>
+        </div>
+        
+        <!-- Slide 4: Problema -->
+        <div class="slide degraded-forest-bg" id="slide-4">
+            <h2 class="text-4xl leading-tight">Como um jogo pode gerar <br><b>consciência ambiental real</b> e duradoura?</h2>
+        </div>
+        
+        <!-- Slide 5: Solução -->
+        <div class="slide" id="slide-5">
+            <h2>Nossa Solução:</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 w-full max-w-5xl mt-4 text-left">
+                <div class="p-4 bg-black/20 rounded-lg"><h3 class="text-orange-400">Narrativa Ambiental Envolvente</h3><p class="text-sm">O jogador controla um guardião que retorna à Terra para restaurar o equilíbrio ecológico após a destruição causada pela ganância humana.</p></div>
+                <div class="p-4 bg-black/20 rounded-lg"><h3 class="text-orange-400">Parte do Lucro para ONGs</h3><p class="text-sm">Cada compra do jogo já contribui com instituições como <strong>Greenpeace</strong>, <strong>SOS Pantanal</strong> e <strong>WWF Brasil</strong>.</p></div>
+                <div class="p-4 bg-black/20 rounded-lg"><h3 class="text-orange-400">Educação como Experiência</h3><p class="text-sm">Fases e missões baseadas em problemas reais (desmatamento, poluição, queimadas), com mecânicas que promovem empatia e urgência.</p></div>
+                <div class="p-4 bg-black/20 rounded-lg"><h3 class="text-orange-400">Site com Engajamento e Transparência</h3><p class="text-sm">Área onde o jogador pode fazer doações voluntárias diretamente às ONGs parceiras e acompanhar o impacto real.</p></div>
+                <div class="p-4 bg-black/20 rounded-lg col-span-1 md:col-span-2"><h3 class="text-orange-400">Comunidade Colaborativa e Recompensas</h3><p class="text-sm">Fórum para discutir o jogo, o meio ambiente e enviar ideias de missões baseadas em histórias reais. Jogadores com maior engajamento ganham recompensas raras no jogo.</p></div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Imagens da Demo -->
+        <div class="slide" id="slide-6">
+            <h2>Imagens da Demo do Jogo</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full h-48 mt-4">
+                <div class="image-placeholder"><span>[Imagem de Jogo 1]</span></div>
+                <div class="image-placeholder"><span>[Imagem de Jogo 2]</span></div>
+                <div class="image-placeholder"><span>[Imagem de Jogo 3]</span></div>
+                <div class="image-placeholder"><span>[Imagem de Jogo 4]</span></div>
+            </div>
+            <p class="mt-8 font-bold text-lg tracking-widest text-orange-400">Ação • Aventura • RPG • Metroidvania</p>
+        </div>
+
+        <!-- Slide 7: Imagens do Site -->
+        <div class="slide" id="slide-7">
+            <h2>Imagens do Site Oficial</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full h-48 mt-4">
+                <div class="image-placeholder"><span>[Página Inicial]</span></div>
+                <div class="image-placeholder"><span>[Área de Doações]</span></div>
+                <div class="image-placeholder"><span>[Ranking de Impacto]</span></div>
+                <div class="image-placeholder"><span>[Fórum da Comunidade]</span></div>
+            </div>
+            <p class="mt-8">Uma plataforma integrada para engajamento e transparência.</p>
+        </div>
+        
+        <!-- Slide 8: Diferenciais Competitivos -->
+        <div class="slide" id="slide-8">
+            <h2>Diferenciais Competitivos</h2>
+            <br>
+            <ul class="space-y-4 max-w-3xl w-full styled-list">
+                <li><p><strong>Foco real em educação ambiental com impacto mensurável:</strong> Vai além do entretenimento, conscientizando e transformando comportamento.</p></li>
+                <li><p><strong>Integração direta com ONGs:</strong> Parte do lucro do jogo é doada, gerando impacto real e transparente, além do incetivo a doações voluntárias pelos jogadores.</p></li>
+                <li><p><strong>Recompensas baseadas em engajamento no mundo real:</strong> Maiores engajamentos no fórum do site oficial gera recompensas no jogo.</p></li>
+                <li><p><strong>Narrativa ambiental profunda e atual:</strong> Conecta o jogador emocionalmente a temas urgentes como aquecimento global e desmatamento.</p></li>
+            </ul>
+        </div>
+        
+        <!-- Slide 9: Modelo de Negócio -->
+        <div class="slide" id="slide-9">
+            <h2>Modelo de Negócio</h2>
+            <br>
+            <ul class="space-y-4 max-w-3xl w-full styled-list">
+                <li><p><strong>Venda do jogo com valor fixo:</strong> Parte do lucro é doada a ONGs ambientais.</p></li>
+                <li><p><strong>Engajamento recompensado:</strong> Jogadores que participam de ações ganham itens raros no jogo.</p></li>
+                <li><p><strong>Site integrado com doações voluntárias:</strong> Plataforma com transparência, fórum e ranking de engajamento.</p></li>
+                <li><p><strong>Parceria com ONGs:</strong> Apoio mútuo para campanhas, divulgação e legitimidade do projeto.</p></li>
+                <li><p><strong>Modelo escalável com foco em impacto:</strong> Expansão com novas fases e temas ambientais reais.</p></li>
+            </ul>
+        </div>
+        
+        <!-- Slide 10: Público-Alvo -->
+        <div class="slide" id="slide-10">
+            <h2>Público-Alvo</h2>
+            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <div class="target-card">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    <h3>Jovens e Estudantes</h3>
+                    <p>Buscam novas formas de aprendizado e entretenimento com propósito.</p>
+                </div>
+                <div class="target-card">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.94 11A8.49 8.49 0 0 0 12.51 3H12a10 10 0 0 0-10 10v0c0 5.52 4.48 10 10 10h.51a8.49 8.49 0 0 0 8.43-8Z"></path><path d="M12 3v1a9 9 0 0 0 0 18v1"></path></svg>
+                    <h3>Engajados com o Meio Ambiente</h3>
+                    <p>Desejam ver suas paixões refletidas em ações de impacto real e transparente.</p>
+                </div>
+                <div class="target-card">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <h3>Gamers Colaborativos</h3>
+                    <p>Valorizam experiências imersivas, narrativas profundas e comunidades ativas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Equipe -->
+        <div class="slide" id="slide-11">
+            <h2>Equipe</h2>
+            <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
+                <div class="text-center p-4">
+                    <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
+                         <img src="Hércules.jpg" alt="Foto de Hércules Lacerda" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg text-white font-semibold">Hércules Lacerda</h3>
+                    <p class="text-orange-400 text-sm">Game Developer & Quality Analyst</p>
+                    <p class="text-xs text-gray-400 mt-2">hercules.lacerda@ba.estudante.senai.br</p>
+                </div>
+                 <div class="text-center p-4">
+                    <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
+                         <img src="Davi.jpg" alt="Foto de Davi Amaral" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg text-white font-semibold">Davi Amaral</h3>
+                    <p class="text-orange-400 text-sm">Game Developer</p>
+                    <p class="text-xs text-gray-400 mt-2">davi.cardoso@ba.estudabnte.senai.br</p>
+                </div>
+                 <div class="text-center p-4">
+                    <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
+                         <img src="Yuri.jpg" alt="Foto de Yuri Matheus Barros" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg text-white font-semibold">Yuri Matheus Barros</h3>
+                    <p class="text-orange-400 text-sm">Project Coordinator & Web Developer</p>
+                    <p class="text-xs text-gray-400 mt-2">yuri.m.matos@ba.estudante.senai.br</p>
+                </div>
+                 <div class="text-center p-4">
+                    <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
+                         <img src="https://placehold.co/112x112/192532/a0a0a0?text=Foto" alt="Foto de Lucas Pereira" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg text-white font-semibold">Lucas Pereira</h3>
+                    <p class="text-orange-400 text-sm">Game Artist</p>
+                    <p class="text-xs text-gray-400 mt-2">lucas.p.silva7@ba.estudante.senai.br</p>
+                </div>
+            </div>
+             <p class="mt-8">Obrigado!</p>
+        </div>
+
+    </div>
+
+    <!-- Navegação Principal (Inicialmente oculta) -->
+    <div id="navigation" style="display: none;">
+        <button id="prev-btn" class="nav-btn">&lt; Anterior</button>
+        <span id="slide-counter">1 / 11</span>
+        <button id="next-btn" class="nav-btn">Próximo &gt;</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elementos do Teaser
+            const teaserSlide = document.getElementById('teaser-slide');
+            const video = document.getElementById('teaser-video');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const startBtn = document.getElementById('start-btn');
+
+            // Elementos da Apresentação Principal
+            const presentationContainer = document.getElementById('presentation-container');
+            const navigation = document.getElementById('navigation');
+            const slides = presentationContainer.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            // --- Lógica do Teaser ---
+            if (playPauseBtn && video) {
+                playPauseBtn.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                        playIcon.style.display = 'none';
+                        pauseIcon.style.display = 'block';
+                    } else {
+                        video.pause();
+                        playIcon.style.display = 'block';
+                        pauseIcon.style.display = 'none';
+                    }
+                });
+            }
+
+            if (startBtn) {
+                startBtn.addEventListener('click', () => {
+                    video.pause();
+                    teaserSlide.style.opacity = '0';
+                    teaserSlide.style.pointerEvents = 'none'; // Desabilita interação após o fade-out
+
+                    // Exibe a apresentação principal
+                    presentationContainer.style.display = 'flex';
+                    navigation.style.display = 'flex';
+                    if (slides.length > 0) {
+                        slides[0].classList.add('active'); // Ativa o primeiro slide da apresentação
+                        slideCounter.textContent = `1 / ${totalSlides}`;
+                    }
+                });
+            }
+
+
+            // --- Lógica da Apresentação Principal ---
+            function showSlide(index) {
+                if (slides.length === 0) return;
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (index + totalSlides) % totalSlides;
+                slides[currentSlide].classList.add('active');
+                slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            }
+
+            if(prevBtn) {
+                prevBtn.addEventListener('click', () => { showSlide(currentSlide - 1); });
+            }
+
+            if(nextBtn) {
+                nextBtn.addEventListener('click', () => { showSlide(currentSlide + 1); });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                // Só controla os slides se a apresentação principal estiver visível
+                if (presentationContainer.style.display === 'flex') {
+                    if (e.key === 'ArrowRight') {
+                        showSlide(currentSlide + 1);
+                    } else if (e.key === 'ArrowLeft') {
+                        showSlide(currentSlide - 1);
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
