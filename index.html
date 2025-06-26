@@ -90,10 +90,10 @@
         }
         #teaser-video {
             position: absolute;
-            top: 50%;
+            top: 47%;
             left: 50%;
             width: 100%;
-            height: 80%;
+            height: 83%;
             object-fit: contain;
             transform: translate(-50%, -50%);
         }
@@ -181,7 +181,7 @@
         .styled-list li { background-color: rgba(11, 16, 24, 0.4); padding: 0.75rem 1.5rem; border-radius: 8px; border-left: 3px solid var(--accent-orange-2); text-align: left; transition: all 0.2s ease-in-out; }
         .styled-list li:hover { transform: translateX(10px); border-left-color: var(--accent-orange-1); }
         .logo-image { width: 50%; height: 85%; margin-bottom: 1.5rem; border-radius: 2%; }
-        @keyframes pulse-glow { 0%, 100% { filter: drop-shadow(0 0 10px var(--accent-orange-2)); transform: scale(1); } 50% { filter: drop-shadow(0 0 20px var(--accent-orange-1)); transform: scale(1.05); } }
+        @keyframes pulse-glow { 0%, 100% { filter: drop-shadow(0 0 10px var(--accent-orange-2)); transform: scale(1); } 50% { filter: drop_shadow(0 0 20px var(--accent-orange-1)); transform: scale(1.05); } }
         .quote-block { background: rgba(11, 16, 24, 0.6); padding: 2rem; border-radius: 15px; border-left: 3px solid var(--accent-orange-1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .chart-container { display: flex; gap: 2rem; align-items: center; }
         .chart-circle { position: relative; width: 150px; height: 150px; }
@@ -190,24 +190,80 @@
         .chart-circle-fg { fill: none; stroke: var(--accent-orange-1); stroke-width: 12; stroke-linecap: round; animation: fill-circle 2s ease-out; }
         .chart-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2rem; font-family: var(--font-title); color: var(--accent-orange-1); }
         @keyframes fill-circle { from { stroke-dasharray: 0, 1000; } }
-        .image-placeholder { background-color: #0A120A; border: 2px dashed var(--accent-orange-2); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: var(--text-medium); font-family: var(--font-title); transition: all 0.3s ease; box-shadow: inset 0 0 15px rgba(0,0,0,0.5); width: 100%; height: 100%; }
+        .image-placeholder { background-color: #0A120A;
+        object-fit: cover;
+        border: 1px dashed var(--accent-orange-2);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--text-medium);
+        font-family: var(--font-title);
+        transition: all 0.3s ease;
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        overflow: hidden; }
         .image-placeholder:hover { border-color: var(--accent-orange-1); }
         .degraded-forest-bg { background-image: linear-gradient(rgba(11, 16, 24, 0.9), rgba(25, 37, 50, 1)), url(https://placehold.co/1200x700/3a2d1e/101d11?text=Mundo+Destruído); background-size: cover; background-position: center; }
         .target-card { background-color: rgba(11, 16, 24, 0.4); padding: 2rem 1.5rem; border-radius: 15px; border: 1px solid rgba(110, 191, 139, 0.2); transition: all 0.3s ease-in-out; display: flex; flex-direction: column; align-items: center; height: 100%; }
         .target-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: var(--accent-green-1); }
         .target-card h3 { color: var(--text-light); text-shadow: none; margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1.25rem; }
         .target-card .icon { width: 60px; height: 60px; stroke: var(--accent-green-1); filter: drop-shadow(0 0 8px var(--accent-green-1)); }
-        .target-card p { font-size: 0.9rem; color: var(--text-medium); flex-grow: 1; }
         #navigation { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 20px; z-index: 100; }
         .nav-btn { background-color: rgba(242, 169, 0, 0.2); border: 1px solid var(--accent-orange-2); color: var(--text-light); padding: 10px 20px; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-body); }
         .nav-btn:hover { background-color: var(--accent-orange-1); box-shadow: 0 0 15px var(--accent-orange-2); color: #000; }
         #slide-counter { color: var(--text-medium); font-size: 0.9rem; min-width: 50px; text-align: center; }
+        
+        /* New styles for result cards */
+        .result-card {
+            background-color: rgba(11, 16, 24, 0.4);
+            padding: 1rem; /* Reduced default padding */
+            border-radius: 15px;
+            border: 1px solid rgba(242, 169, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem; /* Reduced default gap for internal content */
+            transition: all 0.2s ease-in-out;
+            height: 100%; /* Ensure cards in a row have equal height */
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            border-color: var(--accent-orange-1);
+        }
+        .result-card h3 {
+            color: var(--text-light);
+            text-shadow: none;
+            margin-bottom: 0.75rem; /* Reduced margin-bottom */
+            display: flex;
+            align-items: center;
+            gap: 0.4rem; /* Reduced gap */
+            font-size: 1.2rem; /* Slightly smaller for clarity */
+            border-bottom: 1px solid rgba(242, 169, 0, 0.1);
+            padding-bottom: 0.4rem; /* Reduced padding */
+        }
+        .result-card .icon-small {
+            font-size: 1.3em; /* Reduced emoji size */
+        }
+        .result-card p, .result-card ul li {
+            color: var(--text-medium);
+            font-size: 0.9rem; /* Reduced font size */
+        }
+        /* Removed .result-concerns-card as per user request */
 
         @media (max-width: 768px) {
-            .slide { padding: 2rem; } h1 { font-size: 2.2rem; } h2 { font-size: 1.8rem; }
+            .slide { padding: 2rem; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
             .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .grid-cols-3 { grid-template-columns: 1fr; }
             .chart-container { flex-direction: column; }
+            .result-card { padding: 0.6rem; } /* Further reduced padding on mobile */
+            .result-card h3 { font-size: 0.9rem; margin-bottom: 0.4rem;} /* Even smaller heading */
+            .result-card p, .result-card ul li { font-size: 0.75rem; } /* Even smaller text */
+            .result-card .icon-small { font-size: 1em; } /* Even smaller emoji */
         }
     </style>
 </head>
@@ -216,7 +272,7 @@
     <!-- Slide Teaser (Fullscreen) -->
     <div id="teaser-slide">
         <video id="teaser-video" autoplay loop>
-            <source src="TEASER GUARDIAN ‐ Feito com o Clipchamp (3) (1).mp4" type="video/mp4">
+            <source src="Guardian - Earth Rescue ｜ Official Teaser.mp4" type="video/mp4">
             O seu navegador não suporta a tag de vídeo.
         </video>
         <div id="teaser-overlay">
@@ -238,8 +294,6 @@
             <h1 class="font-black tracking-widest uppercase">Guardian:</h1>
             <h3 class="font-normal tracking-[0.5em]">Resgate do planeta Terra</h3>
         </div>
-
-        <!-- ... (Todos os outros slides de 2 a 11 permanecem aqui, inalterados) ... -->
 
         <!-- Slide 2: Citação -->
         <div class="slide" id="slide-2">
@@ -270,7 +324,7 @@
                      </div>
                      <div class="text-center">
                          <div class="chart-circle">
-                            <svg><circle class="chart-circle-bg" cx="75" cy="75" r="69"></circle><circle class="chart-circle-fg" cx="75" cy="75" r="69" stroke-dasharray="217, 434"></circle></svg>
+                             <svg><circle class="chart-circle-bg" cx="75" cy="75" r="69"></circle><circle class="chart-circle-fg" cx="75" cy="75" r="69" stroke-dasharray="217, 434"></circle></svg>
                              <div class="chart-text">>50%</div>
                          </div>
                          <p class="mt-2 text-sm">Sem formação específica</p>
@@ -300,10 +354,22 @@
         <div class="slide" id="slide-6">
             <h2>Imagens da Demo do Jogo</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full h-48 mt-4">
-                <div class="image-placeholder"><span>[Imagem de Jogo 1]</span></div>
-                <div class="image-placeholder"><span>[Imagem de Jogo 2]</span></div>
-                <div class="image-placeholder"><span>[Imagem de Jogo 3]</span></div>
-                <div class="image-placeholder"><span>[Imagem de Jogo 4]</span></div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem jogo1.png" alt="Screenshot do Jogo 1">
+                </div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem jogo2.png" alt="Screenshot do Jogo 2">
+                </div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem jogo3.png" alt="Screenshot do Jogo 3">
+                </div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem jogo4.png" alt="Screenshot do Jogo 4">
+                </div>
             </div>
             <p class="mt-8 font-bold text-lg tracking-widest text-orange-400">Ação • Aventura • RPG • Metroidvania</p>
         </div>
@@ -312,10 +378,22 @@
         <div class="slide" id="slide-7">
             <h2>Imagens do Site Oficial</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full h-48 mt-4">
-                <div class="image-placeholder"><span>[Página Inicial]</span></div>
-                <div class="image-placeholder"><span>[Área de Doações]</span></div>
-                <div class="image-placeholder"><span>[Ranking de Impacto]</span></div>
-                <div class="image-placeholder"><span>[Fórum da Comunidade]</span></div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem site1.png" alt="Screenshot da Página Inicial">
+                </div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem site2.png" alt="Screenshot da Área de Doações">
+                </div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem site3.png" alt="Screenshot do Ranking de Impacto">
+                </div>
+                <div class="image-placeholder">
+                    
+                    <img src="imagem site4.png" alt="Screenshot do Fórum da Comunidade">
+                </div>
             </div>
             <p class="mt-8">Uma plataforma integrada para engajamento e transparência.</p>
         </div>
@@ -362,14 +440,14 @@
                             <label class="text-sm text-gray-400 uppercase tracking-wider">Valor para Doação (25%)</label>
                             <div class="text-4xl font-bold text-green-400 tracking-wider bg-black/20 p-3 rounded-md mt-1">R$ 12.043,12</div>
                         </div>
-                         <div class="mt-4">
-                            <h4 class="text-lg font-bold text-white mb-2">Relatório de Impacto da Parceria</h4>
-                            <div class="p-4 rounded-md bg-black/20 text-gray-300 text-sm">
-                                <p>✓ Compra de equipamentos para brigadas anti-incêndio.</p>
-                                <p>✓ Apoio a projetos de reabilitação de animais resgatados.</p>
-                                <p class="mt-2"><a href="#" class="text-orange-400 hover:underline font-semibold">Ver relatório completo da ONG &rarr;</a></p>
-                            </div>
-                        </div>
+                           <div class="mt-4">
+                                <h4 class="text-lg font-bold text-white mb-2">Relatório de Impacto da Parceria</h4>
+                                <div class="p-4 rounded-md bg-black/20 text-gray-300 text-sm">
+                                    <p>✓ Compra de equipamentos para brigadas anti-incêndio.</p>
+                                    <p>✓ Apoio a projetos de reabilitação de animais resgatados.</p>
+                                    <p class="mt-2"><a href="#" class="text-orange-400 hover:underline font-semibold">Ver relatório completo da ONG &rarr;</a></p>
+                                </div>
+                           </div>
                     </div>
                 </div>
                 <!-- Coluna Direita: Explicação -->
@@ -382,15 +460,15 @@
                         <h4 class="font-bold text-white">Auditoria Pública</h4>
                         <p class="text-sm text-gray-400">Links diretos para os relatórios e comunicados das ONGs parceiras, garantindo veracidade e transparência total.</p>
                     </div>
-                     <div class="p-4 rounded-lg bg-black/20">
-                        <h4 class="font-bold text-white">Ciclo de Confiança</h4>
-                        <p class="text-sm text-gray-400">O jogador não só doa, mas vê o resultado concreto do seu investimento, fortalecendo a lealdade e o engajamento.</p>
-                    </div>
+                       <div class="p-4 rounded-lg bg-black/20">
+                            <h4 class="font-bold text-white">Ciclo de Confiança</h4>
+                            <p class="text-sm text-gray-400">O jogador não só doa, mas vê o resultado concreto do seu investimento, fortalecendo a lealdade e o engajamento.</p>
+                       </div>
                 </div>
             </div>
         </div>
         
-        <!-- Slide 10: Público-Alvo -->
+        <!-- Slide 11: Público-Alvo -->
         <div class="slide" id="slide-11">
             <h2>Público-Alvo</h2>
             <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
@@ -446,7 +524,7 @@
                     <div class="p-1"><div class="roadmap-item bg-green-500">Dev. do Fórum</div></div>
                     <div class="p-1"><div class="roadmap-item bg-green-500">Lançamento Fórum</div></div>
 
-                     <!-- Linha: Parcerias -->
+                    <!-- Linha: Parcerias -->
                     <div class="p-2 font-semibold text-gray-300 flex items-center">Parcerias</div>
                     <div class="p-1"><div class="roadmap-item bg-purple-500">Mapeamento de ONGs</div></div>
                     <div class="p-1"><div class="roadmap-item bg-purple-500">Apresentação</div></div>
@@ -456,44 +534,97 @@
             </div>
         </div>
 
-        <!-- Slide 11: Equipe -->
+        <!-- Validação de Ideia – Jogo GUARDIAN -->
         <div class="slide" id="slide-13">
+            <h2 class="mb-6">Validação de Ideia – Jogo GUARDIAN</h2> 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6 w-full max-w-5xl"> 
+                <!-- Perfil -->
+                <div class="result-card">
+                    <h3><span class="icon-small">👥</span> Perfil do Jogador (N=23)</h3>
+                    <p><strong>73,9%</strong> têm entre 18–24 anos</p>
+                    <p><strong>68%</strong> jogam em PC/Mac</p>
+                    <p><strong>56%</strong> jogam pelo menos toda semana</p>
+                </div>
+
+                <!-- Interesse no Jogo -->
+                <div class="result-card">
+                    <h3><span class="icon-small">🎮</span> Interesse no Jogo</h3>
+                    <p><strong>43,5%</strong> acharam <span class="text-orange-400">"muito interessante"</span></p>
+                    <p><strong>39,1%</strong> acharam <span class="text-orange-400">"interessante"</span></p>
+                    <p><strong>0%</strong> rejeição</p>
+                </div>
+
+                <!-- Elementos que mais atraem -->
+                <div class="result-card">
+                    <h3><span class="icon-small">✨</span> Elementos Mais Atraentes</h3>
+                    <ul class="list-disc list-inside space-y-0.5"> <!-- Reduced space-y -->
+                        <li><strong>34,8%</strong>: missões com problemas ecológicos reais</li>
+                        <li><strong>26,1%</strong>: doações para ONGs ambientais</li>
+                        <li><strong>13%</strong>: todos os itens combinados</li>
+                    </ul>
+                </div>
+
+                <!-- Recompensas e Ações Reais -->
+                <div class="result-card">
+                    <h3><span class="icon-small">🎁</span> Recompensas e Ações Reais</h3>
+                    <p><strong>69,6%</strong> se sentiriam motivados a realizar ações ambientais</p>
+                    <p><strong>82,6%</strong> gastariam dinheiro no jogo se parte fosse doado a ONGs</p>
+                </div>
+
+                <!-- Modelo de Monetização -->
+                <div class="result-card">
+                    <h3><span class="icon-small">💸</span> Modelo de Monetização</h3>
+                    <p><strong>78,3%</strong> comprariam o Passe de Batalha (25% lucro doado)</p>
+                    <p><strong>52%</strong> gostam ou acham excelente esse modelo</p>
+                </div>
+
+                <!-- Conscientização -->
+                <div class="result-card">
+                    <h3><span class="icon-small">🧠</span> Conscientização Ambiental</h3>
+                    <p><strong>65,2%</strong> acreditam que jogos podem conscientizar ambientalmente</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Slide 14: Equipe (Originalmente slide-13) -->
+        <div class="slide" id="slide-14">
             <h2>Equipe</h2>
             <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
                 <div class="text-center p-4">
                     <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
-                         <img src="Hércules.jpg" alt="Foto de Hércules Lacerda" class="w-full h-full object-cover">
+                            <img src="Hércules.jpg" alt="Foto de Hércules Lacerda" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-lg text-white font-semibold">Hércules Lacerda</h3>
                     <p class="text-orange-400 text-sm">Game Developer & Quality Analyst</p>
                     <p class="text-xs text-gray-400 mt-2">hercules.lacerda@ba.estudante.senai.br</p>
                 </div>
-                 <div class="text-center p-4">
+                   <div class="text-center p-4">
                     <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
-                         <img src="Davi.jpg" alt="Foto de Davi Amaral" class="w-full h-full object-cover">
+                            <img src="Davi.jpg" alt="Foto de Davi Amaral" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-lg text-white font-semibold">Davi Amaral</h3>
-                    <p class="text-orange-400 text-sm">Game Developer</p>
+                    <p class="text-orange-400 text-sm">Lead Game Developer</p>
                     <p class="text-xs text-gray-400 mt-2">davi.cardoso@ba.estudabnte.senai.br</p>
                 </div>
-                 <div class="text-center p-4">
+                   <div class="text-center p-4">
                     <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
-                         <img src="Yuri.jpg" alt="Foto de Yuri Matheus Barros" class="w-full h-full object-cover">
+                            <img src="Yuri.jpg" alt="Foto de Yuri Matheus Barros" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-lg text-white font-semibold">Yuri Matheus Barros</h3>
                     <p class="text-orange-400 text-sm">Project Coordinator & Web Developer</p>
                     <p class="text-xs text-gray-400 mt-2">yuri.m.matos@ba.estudante.senai.br</p>
                 </div>
-                 <div class="text-center p-4">
+                   <div class="text-center p-4">
                     <div class="w-28 h-28 mx-auto rounded-full bg-gray-900/50 border-2 border-orange-400/50 mb-4 flex items-center justify-center transition-all duration-300 hover:border-orange-400 overflow-hidden">
-                         <img src="lucas.jpg" alt="Foto de Lucas Pereira" class="w-full h-full object-cover">
+                            <img src="lucas.jpg" alt="Foto de Lucas Pereira" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-lg text-white font-semibold">Lucas Pereira</h3>
                     <p class="text-orange-400 text-sm">Game Artist</p>
                     <p class="text-xs text-gray-400 mt-2">lucas.p.silva7@ba.estudante.senai.br</p>
                 </div>
             </div>
-             <p class="mt-8">Obrigado!</p>
+               <p class="mt-8">Obrigado!</p>
         </div>
 
     </div>
@@ -501,7 +632,7 @@
     <!-- Navegação Principal (Inicialmente oculta) -->
     <div id="navigation" style="display: none;">
         <button id="prev-btn" class="nav-btn">&lt; Anterior</button>
-        <span id="slide-counter">1 / 13</span>
+        <span id="slide-counter">1 / 14</span> <!-- Updated total slides -->
         <button id="next-btn" class="nav-btn">Próximo &gt;</button>
     </div>
 
@@ -524,7 +655,7 @@
             const slideCounter = document.getElementById('slide-counter');
             
             let currentSlide = 0;
-            const totalSlides = slides.length;
+            const totalSlides = slides.length; // Dynamically gets the total number of slides
 
             // --- Lógica do Teaser ---
             if (playPauseBtn && video) {
